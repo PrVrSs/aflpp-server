@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package acrux;
+
+
+service AFLPP {
+  rpc start (StartRequest) returns (StartReply) {}
+  rpc stop (StopRequest) returns (StopReply) {}
+}
+
+
+message StartRequest {
+  string filename = 1;
+  bytes binary = 2;
+  string binary_args = 3;
+}
+
+
+message StartReply {
+  bool success = 1;
+}
+
+
+message StopRequest {}
+
+
+message StopReply {
+  bool success = 1;
+}
