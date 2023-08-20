@@ -19,10 +19,14 @@ class AFLPPServicer(_AFLPPServicer):
         self._aflpp = aflpp
 
     async def start(self, request: StartRequest, context: grpc.aio.ServicerContext) -> StartReply:
-        await self._aflpp.start(
-            source=request.binary,
+        return StartReply(
+            success=await self._aflpp.start(
+                source=request.binary,
+                aflpp_args=request.aflpp_args,
+                binary_args=request.binary_args,
+                seeds=request.seeds,
+            )
         )
-        return StartReply(success=True)
 
     async def stop(self, request: StopRequest, context: grpc.aio.ServicerContext) -> StopReply:
         await self._aflpp.stop()

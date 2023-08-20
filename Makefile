@@ -22,6 +22,6 @@ test: lint mypy unit
 proto:
 	$(GRPC) -I . \
 		--python_out=./aflpp_server \
-		--pyi_out=./aflpp_server \
+		--mypy_out=./aflpp_server \
 		--grpc_python_out=./aflpp_server \
 		./protoc/*.proto

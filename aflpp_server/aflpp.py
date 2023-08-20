@@ -26,22 +26,25 @@ class AFLPP:
         self._tasks = []
         self._reports = []
 
-    async def start(self, source):
+    async def start(self, source: bytes, aflpp_args: str, binary_args: str, seeds: list[bytes]) -> bool:
         logger.info('Start Fuzzer')
 
         self._target = Binary(source=source)
+        self._workspace.create_seeds(seeds)
 
         await self._aflpp_proc.run(
             target=self._target.path(),
-            target_arguments=[],
-            aflpp_arguments=['-M', 'main'],
+            target_arguments=binary_args.split(),
+            aflpp_arguments=aflpp_args.split(),
         )
-        self._workspace.start()
 
+        self._workspace.start()
         self._tasks = [
             self._loop.create_task(self._monitor_task()),
             self._loop.create_task(self._replay_task()),
         ]
+
+        return True
 
     async def stop(self):
         logger.info('Stop Fuzzer')

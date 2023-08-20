@@ -52,6 +52,7 @@ class AFLProcess:
             logger.info('[AFL++] AFL++: running')
 
         workspace_cmd = [
+            '-M', 'main',
             '-i', f'{self._workspace.input_dir}',
             '-F', f'{self._workspace.dynamic_input_dir}',
             '-o', f'{self._workspace.output_dir}',

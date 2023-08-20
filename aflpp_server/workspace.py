@@ -40,8 +40,14 @@ class Workspace:
         for directory in [self.target_dir, self.input_dir, self.dynamic_input_dir, self.corpus_dir, self.crash_dir]:
             directory.mkdir(parents=True)
 
-        seed_path = self.input_dir / 'seed-dummy'
-        seed_path.write_bytes(b'u 4 capsme')
+    def create_seeds(self, seeds: list[bytes]):
+        if not seeds:
+            seed_path = self.input_dir / 'seed-dummy'
+            seed_path.write_bytes(b'init')
+
+        for index, seed in enumerate(seeds):
+            seed_path = self.input_dir / f'seed-{index}'
+            seed_path.write_bytes(seed)
 
     def start(self):
         self._observer.start()

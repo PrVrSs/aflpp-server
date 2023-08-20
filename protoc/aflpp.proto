@@ -2,6 +2,10 @@ syntax = "proto3";
 
 package acrux;
 
+message Server {
+    string name = 1;
+    string version = 2;
+}
 
 service AFLPP {
   rpc start (StartRequest) returns (StartReply) {}
@@ -10,9 +14,10 @@ service AFLPP {
 
 
 message StartRequest {
-  string filename = 1;
-  bytes binary = 2;
-  string binary_args = 3;
+  bytes binary = 1;
+  string binary_args = 2;
+  string aflpp_args = 3;
+  repeated bytes seeds = 4;
 }
 
 

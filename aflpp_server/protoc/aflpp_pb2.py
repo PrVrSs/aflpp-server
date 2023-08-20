@@ -6,8 +6,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-
-
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -15,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12protoc/aflpp.proto\x12\x05\x61\x63rux\"E\n\x0cStartRequest\x12\x10\n\x08\x66ilename\x18\x01 \x01(\t\x12\x0e\n\x06\x62inary\x18\x02 \x01(\x0c\x12\x13\n\x0b\x62inary_args\x18\x03 \x01(\t\"\x1d\n\nStartReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\r\n\x0bStopRequest\"\x1c\n\tStopReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32j\n\x05\x41\x46LPP\x12\x31\n\x05start\x12\x13.acrux.StartRequest\x1a\x11.acrux.StartReply\"\x00\x12.\n\x04stop\x12\x12.acrux.StopRequest\x1a\x10.acrux.StopReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12protoc/aflpp.proto\x12\x05\x61\x63rux\"\'\n\x06Server\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\"V\n\x0cStartRequest\x12\x0e\n\x06\x62inary\x18\x01 \x01(\x0c\x12\x13\n\x0b\x62inary_args\x18\x02 \x01(\t\x12\x12\n\naflpp_args\x18\x03 \x01(\t\x12\r\n\x05seeds\x18\x04 \x03(\x0c\"\x1d\n\nStartReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\r\n\x0bStopRequest\"\x1c\n\tStopReply\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32j\n\x05\x41\x46LPP\x12\x31\n\x05start\x12\x13.acrux.StartRequest\x1a\x11.acrux.StartReply\"\x00\x12.\n\x04stop\x12\x12.acrux.StopRequest\x1a\x10.acrux.StopReply\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -23,14 +21,16 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'protoc.aflpp_pb2', _globals
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _globals['_STARTREQUEST']._serialized_start=29
-  _globals['_STARTREQUEST']._serialized_end=98
-  _globals['_STARTREPLY']._serialized_start=100
-  _globals['_STARTREPLY']._serialized_end=129
-  _globals['_STOPREQUEST']._serialized_start=131
-  _globals['_STOPREQUEST']._serialized_end=144
-  _globals['_STOPREPLY']._serialized_start=146
-  _globals['_STOPREPLY']._serialized_end=174
-  _globals['_AFLPP']._serialized_start=176
-  _globals['_AFLPP']._serialized_end=282
+  _globals['_SERVER']._serialized_start=29
+  _globals['_SERVER']._serialized_end=68
+  _globals['_STARTREQUEST']._serialized_start=70
+  _globals['_STARTREQUEST']._serialized_end=156
+  _globals['_STARTREPLY']._serialized_start=158
+  _globals['_STARTREPLY']._serialized_end=187
+  _globals['_STOPREQUEST']._serialized_start=189
+  _globals['_STOPREQUEST']._serialized_end=202
+  _globals['_STOPREPLY']._serialized_start=204
+  _globals['_STOPREPLY']._serialized_end=232
+  _globals['_AFLPP']._serialized_start=234
+  _globals['_AFLPP']._serialized_end=340
 # @@protoc_insertion_point(module_scope)
