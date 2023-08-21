@@ -60,7 +60,7 @@ class StartRequest(google.protobuf.message.Message):
 global___StartRequest = StartRequest
 
 @typing_extensions.final
-class StartReply(google.protobuf.message.Message):
+class StartResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     SUCCESS_FIELD_NUMBER: builtins.int
@@ -72,7 +72,7 @@ class StartReply(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["success", b"success"]) -> None: ...
 
-global___StartReply = StartReply
+global___StartResponse = StartResponse
 
 @typing_extensions.final
 class StopRequest(google.protobuf.message.Message):
@@ -85,7 +85,7 @@ class StopRequest(google.protobuf.message.Message):
 global___StopRequest = StopRequest
 
 @typing_extensions.final
-class StopReply(google.protobuf.message.Message):
+class StopResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     SUCCESS_FIELD_NUMBER: builtins.int
@@ -97,4 +97,4 @@ class StopReply(google.protobuf.message.Message):
     ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["success", b"success"]) -> None: ...
 
-global___StopReply = StopReply
+global___StopResponse = StopResponse

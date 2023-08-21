@@ -7,7 +7,7 @@ from aflpp_server.aflpp import AFLPP
 from aflpp_server.helper import async_run, cleanup_coroutines
 from aflpp_server.logger import logger
 from aflpp_server.process import AFLProcess
-from aflpp_server.protoc.aflpp_pb2 import StartReply, StartRequest, StopReply, StopRequest
+from aflpp_server.protoc.aflpp_pb2 import StartResponse, StartRequest, StopResponse, StopRequest
 from aflpp_server.protoc.aflpp_pb2_grpc import AFLPPServicer as _AFLPPServicer
 from aflpp_server.protoc.aflpp_pb2_grpc import add_AFLPPServicer_to_server
 from aflpp_server.settings import settings
@@ -18,8 +18,8 @@ class AFLPPServicer(_AFLPPServicer):
     def __init__(self, aflpp: AFLPP):
         self._aflpp = aflpp
 
-    async def start(self, request: StartRequest, context: grpc.aio.ServicerContext) -> StartReply:
-        return StartReply(
+    async def start(self, request: StartRequest, context: grpc.aio.ServicerContext) -> StartResponse:
+        return StartResponse(
             success=await self._aflpp.start(
                 source=request.binary,
                 aflpp_args=request.aflpp_args,
@@ -28,9 +28,9 @@ class AFLPPServicer(_AFLPPServicer):
             )
         )
 
-    async def stop(self, request: StopRequest, context: grpc.aio.ServicerContext) -> StopReply:
+    async def stop(self, request: StopRequest, context: grpc.aio.ServicerContext) -> StopResponse:
         await self._aflpp.stop()
-        return StopReply(success=True)
+        return StopResponse(success=True)
 
 
 class AFLPPServer:

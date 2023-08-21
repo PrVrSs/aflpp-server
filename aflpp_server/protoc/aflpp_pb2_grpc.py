@@ -17,12 +17,12 @@ class AFLPPStub(object):
         self.start = channel.unary_unary(
                 '/acrux.AFLPP/start',
                 request_serializer=protoc_dot_aflpp__pb2.StartRequest.SerializeToString,
-                response_deserializer=protoc_dot_aflpp__pb2.StartReply.FromString,
+                response_deserializer=protoc_dot_aflpp__pb2.StartResponse.FromString,
                 )
         self.stop = channel.unary_unary(
                 '/acrux.AFLPP/stop',
                 request_serializer=protoc_dot_aflpp__pb2.StopRequest.SerializeToString,
-                response_deserializer=protoc_dot_aflpp__pb2.StopReply.FromString,
+                response_deserializer=protoc_dot_aflpp__pb2.StopResponse.FromString,
                 )
 
 
@@ -47,12 +47,12 @@ def add_AFLPPServicer_to_server(servicer, server):
             'start': grpc.unary_unary_rpc_method_handler(
                     servicer.start,
                     request_deserializer=protoc_dot_aflpp__pb2.StartRequest.FromString,
-                    response_serializer=protoc_dot_aflpp__pb2.StartReply.SerializeToString,
+                    response_serializer=protoc_dot_aflpp__pb2.StartResponse.SerializeToString,
             ),
             'stop': grpc.unary_unary_rpc_method_handler(
                     servicer.stop,
                     request_deserializer=protoc_dot_aflpp__pb2.StopRequest.FromString,
-                    response_serializer=protoc_dot_aflpp__pb2.StopReply.SerializeToString,
+                    response_serializer=protoc_dot_aflpp__pb2.StopResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -77,7 +77,7 @@ class AFLPP(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/acrux.AFLPP/start',
             protoc_dot_aflpp__pb2.StartRequest.SerializeToString,
-            protoc_dot_aflpp__pb2.StartReply.FromString,
+            protoc_dot_aflpp__pb2.StartResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -94,6 +94,6 @@ class AFLPP(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/acrux.AFLPP/stop',
             protoc_dot_aflpp__pb2.StopRequest.SerializeToString,
-            protoc_dot_aflpp__pb2.StopReply.FromString,
+            protoc_dot_aflpp__pb2.StopResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

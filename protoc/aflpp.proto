@@ -8,8 +8,8 @@ message Server {
 }
 
 service AFLPP {
-  rpc start (StartRequest) returns (StartReply) {}
-  rpc stop (StopRequest) returns (StopReply) {}
+  rpc start (StartRequest) returns (StartResponse) {}
+  rpc stop (StopRequest) returns (StopResponse) {}
 }
 
 
@@ -21,7 +21,7 @@ message StartRequest {
 }
 
 
-message StartReply {
+message StartResponse {
   bool success = 1;
 }
 
@@ -29,6 +29,6 @@ message StartReply {
 message StopRequest {}
 
 
-message StopReply {
+message StopResponse {
   bool success = 1;
 }

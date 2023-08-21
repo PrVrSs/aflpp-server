@@ -1,4 +1,4 @@
-.PHONY: unit mypy lint grammar
+.PHONY: unit mypy lint test
 
 SHELL := /usr/bin/env bash
 GRPC := python -m grpc_tools.protoc
