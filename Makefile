@@ -24,4 +24,4 @@ proto:
 		--python_out=./aflpp_server \
 		--mypy_out=./aflpp_server \
 		--grpc_python_out=./aflpp_server \
-		./protoc/*.proto
+		./protoc/v1/*.proto

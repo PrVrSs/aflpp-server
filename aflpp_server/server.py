@@ -7,9 +7,9 @@ from aflpp_server.aflpp import AFLPP
 from aflpp_server.helper import async_run, cleanup_coroutines
 from aflpp_server.logger import logger
 from aflpp_server.process import AFLProcess
-from aflpp_server.protoc.aflpp_pb2 import StartResponse, StartRequest, StopResponse, StopRequest
-from aflpp_server.protoc.aflpp_pb2_grpc import AFLPPServicer as _AFLPPServicer
-from aflpp_server.protoc.aflpp_pb2_grpc import add_AFLPPServicer_to_server
+from aflpp_server.protoc.v1.aflpp_pb2 import StartResponse, StartRequest, StopResponse, StopRequest
+from aflpp_server.protoc.v1.aflpp_pb2_grpc import AFLPPServicer as _AFLPPServicer
+from aflpp_server.protoc.v1.aflpp_pb2_grpc import add_AFLPPServicer_to_server
 from aflpp_server.settings import settings
 from aflpp_server.workspace import Workspace
 

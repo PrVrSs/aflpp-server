@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package acrux;
+package aflpp.v1;
 
 message Server {
     string name = 1;

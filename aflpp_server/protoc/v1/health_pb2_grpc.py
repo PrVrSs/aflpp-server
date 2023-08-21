@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from protoc import health_pb2 as protoc_dot_health__pb2
+from protoc.v1 import health_pb2 as protoc_dot_v1_dot_health__pb2
 
 
 class HealthStub(object):
@@ -15,14 +15,14 @@ class HealthStub(object):
             channel: A grpc.Channel.
         """
         self.Check = channel.unary_unary(
-                '/acrux.Health/Check',
-                request_serializer=protoc_dot_health__pb2.HealthCheckRequest.SerializeToString,
-                response_deserializer=protoc_dot_health__pb2.HealthCheckResponse.FromString,
+                '/health.v1.Health/Check',
+                request_serializer=protoc_dot_v1_dot_health__pb2.HealthCheckRequest.SerializeToString,
+                response_deserializer=protoc_dot_v1_dot_health__pb2.HealthCheckResponse.FromString,
                 )
         self.Watch = channel.unary_stream(
-                '/acrux.Health/Watch',
-                request_serializer=protoc_dot_health__pb2.HealthCheckRequest.SerializeToString,
-                response_deserializer=protoc_dot_health__pb2.HealthCheckResponse.FromString,
+                '/health.v1.Health/Watch',
+                request_serializer=protoc_dot_v1_dot_health__pb2.HealthCheckRequest.SerializeToString,
+                response_deserializer=protoc_dot_v1_dot_health__pb2.HealthCheckResponse.FromString,
                 )
 
 
@@ -46,17 +46,17 @@ def add_HealthServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Check': grpc.unary_unary_rpc_method_handler(
                     servicer.Check,
-                    request_deserializer=protoc_dot_health__pb2.HealthCheckRequest.FromString,
-                    response_serializer=protoc_dot_health__pb2.HealthCheckResponse.SerializeToString,
+                    request_deserializer=protoc_dot_v1_dot_health__pb2.HealthCheckRequest.FromString,
+                    response_serializer=protoc_dot_v1_dot_health__pb2.HealthCheckResponse.SerializeToString,
             ),
             'Watch': grpc.unary_stream_rpc_method_handler(
                     servicer.Watch,
-                    request_deserializer=protoc_dot_health__pb2.HealthCheckRequest.FromString,
-                    response_serializer=protoc_dot_health__pb2.HealthCheckResponse.SerializeToString,
+                    request_deserializer=protoc_dot_v1_dot_health__pb2.HealthCheckRequest.FromString,
+                    response_serializer=protoc_dot_v1_dot_health__pb2.HealthCheckResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'acrux.Health', rpc_method_handlers)
+            'health.v1.Health', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -75,9 +75,9 @@ class Health(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/acrux.Health/Check',
-            protoc_dot_health__pb2.HealthCheckRequest.SerializeToString,
-            protoc_dot_health__pb2.HealthCheckResponse.FromString,
+        return grpc.experimental.unary_unary(request, target, '/health.v1.Health/Check',
+            protoc_dot_v1_dot_health__pb2.HealthCheckRequest.SerializeToString,
+            protoc_dot_v1_dot_health__pb2.HealthCheckResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -92,8 +92,8 @@ class Health(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/acrux.Health/Watch',
-            protoc_dot_health__pb2.HealthCheckRequest.SerializeToString,
-            protoc_dot_health__pb2.HealthCheckResponse.FromString,
+        return grpc.experimental.unary_stream(request, target, '/health.v1.Health/Watch',
+            protoc_dot_v1_dot_health__pb2.HealthCheckRequest.SerializeToString,
+            protoc_dot_v1_dot_health__pb2.HealthCheckResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
