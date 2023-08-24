@@ -11,7 +11,7 @@ BINARY = 'afl-fuzz'
 AFLPP_ENV_VAR = 'AFLPP_PATH'
 
 
-def alfpp_binary(root_dir: Path | str | None = None) -> Optional[Path]:
+def aflpp_binary(root_dir: Path | str | None = None) -> Optional[Path]:
     if root_dir:
         bin_path = Path(root_dir) / BINARY
         return bin_path if bin_path.exists() else None
@@ -32,7 +32,7 @@ async def capture_program_output(pipe, log):
 class AFLProcess:
     def __init__(self, workspace, aflpp: Optional[str] = None):
         self._workspace = workspace
-        self._path = alfpp_binary(aflpp)
+        self._path = aflpp_binary(aflpp)
 
         self._process = None
         self._tasks = []
