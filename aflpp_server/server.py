@@ -2,35 +2,16 @@ import asyncio
 
 import grpc
 import janus
+from grpc_health.v1 import health, health_pb2_grpc
 
 from aflpp_server.aflpp import AFLPP
 from aflpp_server.helper import async_run, cleanup_coroutines
 from aflpp_server.logger import logger
 from aflpp_server.process import AFLProcess
-from aflpp_server.protoc.v1.aflpp_pb2 import StartResponse, StartRequest, StopResponse, StopRequest
-from aflpp_server.protoc.v1.aflpp_pb2_grpc import AFLPPServicer as _AFLPPServicer
 from aflpp_server.protoc.v1.aflpp_pb2_grpc import add_AFLPPServicer_to_server
 from aflpp_server.settings import settings
+from aflpp_server.v1.aflpp import AFLPPServicer
 from aflpp_server.workspace import Workspace
-
-
-class AFLPPServicer(_AFLPPServicer):
-    def __init__(self, aflpp: AFLPP):
-        self._aflpp = aflpp
-
-    async def start(self, request: StartRequest, context: grpc.aio.ServicerContext) -> StartResponse:
-        return StartResponse(
-            success=await self._aflpp.start(
-                source=request.binary,
-                aflpp_args=request.aflpp_args,
-                binary_args=request.binary_args,
-                seeds=request.seeds,
-            )
-        )
-
-    async def stop(self, request: StopRequest, context: grpc.aio.ServicerContext) -> StopResponse:
-        await self._aflpp.stop()
-        return StopResponse(success=True)
 
 
 class AFLPPServer:
@@ -38,8 +19,11 @@ class AFLPPServer:
         self._aflpp = aflpp
         self._server = grpc.aio.server()
         self._aflpp_servicer = AFLPPServicer(aflpp)
+        self._health_servicer = health.HealthServicer()
 
-        add_AFLPPServicer_to_server(self._aflpp_servicer, self._server)
+        add_AFLPPServicer_to_server(servicer=self._aflpp_servicer, server=self._server)
+        health_pb2_grpc.add_HealthServicer_to_server(servicer=self._health_servicer, server=self._server)
+
         self._server.add_insecure_port(f'{settings.host}:{settings.port}')
 
         cleanup_coroutines.append(self.shutdown())

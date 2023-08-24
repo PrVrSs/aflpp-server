@@ -69,7 +69,8 @@ class AFLProcess:
         logger.info(f'[AFL++] Run AFL++: {aflpp_cmdline}')
 
         self._process = await asyncio.create_subprocess_exec(
-            self._path, *aflpp_cmdline,
+            self._path,
+            *aflpp_cmdline,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
             env=os.environ.copy() | self.aflpp_env_variables(),

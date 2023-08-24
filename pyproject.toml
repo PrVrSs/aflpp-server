@@ -18,6 +18,7 @@ grpcio-tools = "^1.57.0"
 aiosqlite = "^0.19.0"
 janus = "^1.0.0"
 aiofiles = "^23.2.1"
+grpcio-health-checking = "^1.57.0"
 
 
 [tool.poetry.group.dev.dependencies]
