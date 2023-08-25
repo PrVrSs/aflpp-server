@@ -11,11 +11,11 @@ def create_file(data):
 
 class Binary:
     def __init__(self, source):
-        self._fp = Path(create_file(source))
-        self._fp.chmod(stat.S_IRWXU)
+        self._binary = Path(create_file(source))
+        self._binary.chmod(stat.S_IRWXU)
 
     def path(self):
-        return str(self._fp)
+        return str(self._binary)
 
     def __del__(self):
-        self._fp.unlink()
+        self._binary.unlink()

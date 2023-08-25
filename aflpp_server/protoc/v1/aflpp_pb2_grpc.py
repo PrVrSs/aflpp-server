@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from protoc.v1 import aflpp_pb2 as protoc_dot_v1_dot_aflpp__pb2
+from aflpp_server.protoc.v1 import aflpp_pb2 as protoc_dot_v1_dot_aflpp__pb2
 
 
 class AFLPPStub(object):
