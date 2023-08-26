@@ -50,6 +50,7 @@ class AFLProcess:
     async def run(self, aflpp_arguments, target, target_arguments=None):
         if self._process is not None:
             logger.info('[AFL++] AFL++: running')
+            return
 
         workspace_cmd = [
             '-M', 'main',
@@ -95,4 +96,5 @@ class AFLProcess:
 
         await asyncio.gather(*self._tasks, return_exceptions=True)
 
+        self._tasks = []
         self._process = None

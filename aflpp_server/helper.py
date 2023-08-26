@@ -38,7 +38,7 @@ def set_signal_handler(loop):
             lambda: loop.create_task(shutdown(sig)),  # pylint: disable=cell-var-from-loop
         )
 
-    loop.set_exception_handler(lambda _, ctx: logger.debug(f'Caught exception: {ctx[{"exception"}]}'))
+    loop.set_exception_handler(lambda _, ctx: logger.debug(f'Caught exception: {ctx["message"]}'))
 
 
 def async_run(func):
