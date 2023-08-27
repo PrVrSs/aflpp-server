@@ -3,21 +3,69 @@ syntax = "proto3";
 package aflpp.v1;
 
 message Server {
-    string name = 1;
-    string version = 2;
+  string name = 1;
+  string version = 2;
 }
 
 service AFLPP {
   rpc start (StartRequest) returns (StartResponse) {}
   rpc stop (StopRequest) returns (StopResponse) {}
+  rpc stats (StatisticRequest) returns (StatisticResponse) {}
 }
-
 
 message StartRequest {
   bytes binary = 1;
   string binary_args = 2;
   string aflpp_args = 3;
   repeated bytes seeds = 4;
+}
+
+message StatisticRequest {}
+
+message StatisticResponse {
+  uint64 start_time = 1;
+  uint64 last_update = 2;
+  uint64 run_time = 3;
+  uint32 fuzzer_pid = 4;
+  uint32 cycles_done = 5;
+  uint32 cycles_wo_finds = 6;
+  uint64 time_wo_finds = 7;
+  uint64 execs_done = 8;
+  float execs_per_sec = 9;
+  float execs_ps_last_min = 10;
+  uint32 corpus_count = 11;
+  uint32 corpus_favored = 12;
+  uint32 corpus_found = 13;
+  uint32 corpus_imported = 14;
+  uint32 corpus_variable = 15;
+  uint32 max_depth = 16;
+  uint32 cur_item = 17;
+  uint32 pending_favs = 18;
+  uint32 pending_total = 19;
+  float stability = 20;
+  float bitmap_cvg = 21;
+  uint32 saved_crashes = 22;
+  uint32 saved_hangs = 23;
+  uint64 last_find = 24;
+  uint64 last_crash = 25;
+  uint32 last_hang = 26;
+  uint32 execs_since_crash = 27;
+  uint32 exec_timeout = 28;
+  uint32 slowest_exec_ms = 29;
+  uint32 peak_rss_mb = 30;
+  uint32 cpu_affinity = 31;
+  uint32 edges_found = 32;
+  uint32 total_edges = 33;
+  uint32 var_byte_count = 34;
+  uint32 havoc_expansion = 35;
+  uint32 auto_dict_entries = 36;
+  uint32 testcache_size = 37;
+  uint32 testcache_count = 38;
+  uint32 testcache_evict = 39;
+  string afl_banner = 40;
+  string afl_version = 41;
+  string target_mode = 42;
+  string command_line = 43;
 }
 
 

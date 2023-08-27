@@ -1,5 +1,5 @@
-from aflpp_server.server import init_afl_server
+from aflpp_server.server import run_aflpp_server
 
 
 if __name__ == '__main__':
-    init_afl_server()
+    run_aflpp_server()

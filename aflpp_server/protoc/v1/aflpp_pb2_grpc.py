@@ -24,6 +24,11 @@ class AFLPPStub(object):
                 request_serializer=protoc_dot_v1_dot_aflpp__pb2.StopRequest.SerializeToString,
                 response_deserializer=protoc_dot_v1_dot_aflpp__pb2.StopResponse.FromString,
                 )
+        self.stats = channel.unary_unary(
+                '/aflpp.v1.AFLPP/stats',
+                request_serializer=protoc_dot_v1_dot_aflpp__pb2.StatisticRequest.SerializeToString,
+                response_deserializer=protoc_dot_v1_dot_aflpp__pb2.StatisticResponse.FromString,
+                )
 
 
 class AFLPPServicer(object):
@@ -41,6 +46,12 @@ class AFLPPServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def stats(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AFLPPServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -53,6 +64,11 @@ def add_AFLPPServicer_to_server(servicer, server):
                     servicer.stop,
                     request_deserializer=protoc_dot_v1_dot_aflpp__pb2.StopRequest.FromString,
                     response_serializer=protoc_dot_v1_dot_aflpp__pb2.StopResponse.SerializeToString,
+            ),
+            'stats': grpc.unary_unary_rpc_method_handler(
+                    servicer.stats,
+                    request_deserializer=protoc_dot_v1_dot_aflpp__pb2.StatisticRequest.FromString,
+                    response_serializer=protoc_dot_v1_dot_aflpp__pb2.StatisticResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -95,5 +111,22 @@ class AFLPP(object):
         return grpc.experimental.unary_unary(request, target, '/aflpp.v1.AFLPP/stop',
             protoc_dot_v1_dot_aflpp__pb2.StopRequest.SerializeToString,
             protoc_dot_v1_dot_aflpp__pb2.StopResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def stats(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/aflpp.v1.AFLPP/stats',
+            protoc_dot_v1_dot_aflpp__pb2.StatisticRequest.SerializeToString,
+            protoc_dot_v1_dot_aflpp__pb2.StatisticResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -40,7 +40,7 @@ class AFLPPServer:
 
 
 @async_run
-async def init_afl_server():
+async def run_aflpp_server():
     queue = janus.Queue()
 
     workspace = Workspace(queue.sync_q)
@@ -56,4 +56,4 @@ async def init_afl_server():
 
 
 if __name__ == '__main__':
-    init_afl_server()
+    run_aflpp_server()

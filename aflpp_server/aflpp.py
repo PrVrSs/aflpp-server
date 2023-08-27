@@ -5,6 +5,7 @@ from typing import Callable
 from watchdog.events import FileCreatedEvent
 
 from aflpp_server.binary import Binary
+from aflpp_server.constants import State
 from aflpp_server.logger import logger
 from aflpp_server.process import AFLProcess
 from aflpp_server.replay import make_replay
@@ -17,9 +18,13 @@ class AFLPP:
         self._loop = loop
         self._aflpp_proc = aflpp_proc
         self._replay_queue = asyncio.Queue()
+
+        self._state = State.NOT_RUNNING
+
         self._workspace.watching(self._workspace.crash_dir)
+
         self.fs_handler: dict[str, Callable] = {
-            str(self._workspace.crash_dir): (self.crash_handler, FileCreatedEvent),
+            str(self._workspace.crash_dir): (self._crash_handler, FileCreatedEvent),
         }
 
         self._target = None
@@ -27,6 +32,9 @@ class AFLPP:
         self._reports = []
 
     async def start(self, source: bytes, aflpp_args: str, binary_args: str, seeds: list[bytes]) -> bool:
+        if self._state == State.RUNNING:
+            return False
+
         logger.info('Start Fuzzer')
 
         self._target = Binary(source=source)
@@ -39,32 +47,42 @@ class AFLPP:
         )
 
         self._workspace.start()
-        self._tasks = [
-            self._loop.create_task(self._monitor_task()),
-            self._loop.create_task(self._replay_task()),
-        ]
+        self._create_tasks()
+
+        self._state = State.RUNNING
 
         return True
 
-    async def stop(self):
+    async def stop(self) -> bool:
+        if self._state == State.STOPPED:
+            return False
+
         logger.info('Stop Fuzzer')
+
         self._workspace.stop()
         await self._aflpp_proc.stop()
+
+        self._monitor_queue.close()
+        await self._monitor_queue.wait_closed()
+        await self._replay_queue.join()
 
         for task in self._tasks:
             task.cancel()
 
         await asyncio.gather(*self._tasks, return_exceptions=True)
 
+        self._state = State.STOPPED
+        return True
+
+    async def stats(self):
+        return await self._workspace.get_stats()
+
     async def _replay_task(self):
         while True:
-            try:
-                await self.run_replay(await self._replay_queue.get())
-                self._replay_queue.task_done()
-            except asyncio.CancelledError:
-                break
+            await self._run_replay(await self._replay_queue.get())
+            self._replay_queue.task_done()
 
-    async def run_replay(self, filename: Path):
+    async def _run_replay(self, filename: Path):
         if filename.name == 'README.txt':
             return
 
@@ -75,19 +93,22 @@ class AFLPP:
         logger.info(replay.report)
         self._reports.append(replay.report)
 
+    def _create_tasks(self):
+        self._tasks = [
+            self._loop.create_task(self._monitor_task()),
+            self._loop.create_task(self._replay_task()),
+        ]
+
     async def _monitor_task(self):
         while True:
-            try:
-                event = await self._monitor_queue.async_q.get()
-                path = Path(event.src_path)
+            event = await self._monitor_queue.async_q.get()
+            path = Path(event.src_path)
 
-                handler, event_type = self.fs_handler.get(str(path.parent), (None, None))
-                if handler is not None and isinstance(event, event_type):
-                    await handler(filename=path)
+            handler, event_type = self.fs_handler.get(str(path.parent), (None, None))
+            if handler is not None and isinstance(event, event_type):
+                await handler(filename=path)
 
-                self._monitor_queue.async_q.task_done()
-            except asyncio.CancelledError:
-                break
+            self._monitor_queue.async_q.task_done()
 
-    async def crash_handler(self, filename: Path):
+    async def _crash_handler(self, filename: Path):
         await self._replay_queue.put(filename)

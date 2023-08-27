@@ -1,7 +1,14 @@
 import grpc
 
 from aflpp_server.aflpp import AFLPP
-from aflpp_server.protoc.v1.aflpp_pb2 import StartRequest, StartResponse, StopRequest, StopResponse
+from aflpp_server.protoc.v1.aflpp_pb2 import (
+    StartRequest,
+    StartResponse,
+    StatisticRequest,
+    StatisticResponse,
+    StopRequest,
+    StopResponse,
+)
 from aflpp_server.protoc.v1.aflpp_pb2_grpc import AFLPPServicer as _AFLPPServicer
 
 
@@ -20,5 +27,7 @@ class AFLPPServicer(_AFLPPServicer):
         )
 
     async def stop(self, request: StopRequest, context: grpc.aio.ServicerContext) -> StopResponse:
-        await self._aflpp.stop()
-        return StopResponse(success=True)
+        return StopResponse(success=await self._aflpp.stop())
+
+    async def stats(self, request: StatisticResponse, context: grpc.aio.ServicerContext) -> StatisticResponse:
+        return StatisticResponse(**(await self._aflpp.stats()))
