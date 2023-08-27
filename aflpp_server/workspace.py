@@ -3,8 +3,7 @@ from datetime import datetime
 from pathlib import Path
 
 import aiofiles
-import attrs
-from attrs import define, field
+from attrs import asdict, define, field
 from watchdog.events import (
     DirCreatedEvent,
     DirModifiedEvent,
@@ -106,7 +105,7 @@ class Workspace:
         self._observer.schedule(self._event_handler, path=str(path))
 
     async def get_stats(self):
-        return attrs.asdict(await read_stat_file(str(self.stat_file)))
+        return asdict(await read_stat_file(str(self.stat_file)))
 
     def _init_project(self):
         for directory in [self.target_dir, self.input_dir, self.dynamic_input_dir, self.corpus_dir, self.crash_dir]:
