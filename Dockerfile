@@ -13,15 +13,12 @@ ENV PYTHONFAULTHANDLER=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
     # poetry:
-    POETRY_VERSION=1.1.13 \
+    POETRY_VERSION=1.6.1 \
     POETRY_HOME="/opt/poetry" \
     POETRY_NO_INTERACTION=1 \
     POETRY_CACHE_DIR='/var/cache/pypoetry' \
     PATH="$PATH:/root/.local/bin" \
     PYENV_ROOT=/pyenv
-
-# prepend poetry and venv to path
-ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 RUN git clone https://github.com/pyenv/pyenv.git /pyenv
 RUN /pyenv/bin/pyenv install 3.11.4
@@ -39,6 +36,15 @@ COPY ./aflpp_server /code/aflpp_server
 # install dependencies
 RUN python3.11 -m poetry config virtualenvs.in-project true --local
 RUN python3.11 -m poetry install --no-dev --no-root --no-interaction --no-ansi
+
+FROM aflplusplus/aflplusplus AS build-image
+
+WORKDIR /code
+
+COPY --from=compile-image /pyenv /pyenv
+COPY --from=compile-image /code .
+
+ENV PATH /pyenv/versions/3.11.4/bin:${PATH}
 
 EXPOSE 50051
 

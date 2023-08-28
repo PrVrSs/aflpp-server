@@ -29,5 +29,5 @@ class AFLPPServicer(_AFLPPServicer):
     async def stop(self, request: StopRequest, context: grpc.aio.ServicerContext) -> StopResponse:
         return StopResponse(success=await self._aflpp.stop())
 
-    async def stats(self, request: StatisticResponse, context: grpc.aio.ServicerContext) -> StatisticResponse:
+    async def stats(self, request: StatisticRequest, context: grpc.aio.ServicerContext) -> StatisticResponse:
         return StatisticResponse(**(await self._aflpp.stats()))
