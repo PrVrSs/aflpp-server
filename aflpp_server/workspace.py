@@ -66,10 +66,10 @@ class Stats:
 
 
 def _parse_stats_line(line: str) -> tuple[str, str]:
-    return tuple([
+    return tuple(
         item.strip()
         for item in line.split(sep=':', maxsplit=1)
-    ])
+    )
 
 
 async def read_stat_file(file: str):

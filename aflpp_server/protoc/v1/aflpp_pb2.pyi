@@ -17,24 +17,6 @@ else:
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 @typing_extensions.final
-class Server(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    NAME_FIELD_NUMBER: builtins.int
-    VERSION_FIELD_NUMBER: builtins.int
-    name: builtins.str
-    version: builtins.str
-    def __init__(
-        self,
-        *,
-        name: builtins.str = ...,
-        version: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["name", b"name", "version", b"version"]) -> None: ...
-
-global___Server = Server
-
-@typing_extensions.final
 class StartRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -58,6 +40,21 @@ class StartRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["aflpp_args", b"aflpp_args", "binary", b"binary", "binary_args", b"binary_args", "seeds", b"seeds"]) -> None: ...
 
 global___StartRequest = StartRequest
+
+@typing_extensions.final
+class StartResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SUCCESS_FIELD_NUMBER: builtins.int
+    success: builtins.bool
+    def __init__(
+        self,
+        *,
+        success: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["success", b"success"]) -> None: ...
+
+global___StartResponse = StartResponse
 
 @typing_extensions.final
 class StatisticRequest(google.protobuf.message.Message):
@@ -211,19 +208,35 @@ class StatisticResponse(google.protobuf.message.Message):
 global___StatisticResponse = StatisticResponse
 
 @typing_extensions.final
-class StartResponse(google.protobuf.message.Message):
+class ReportRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    SUCCESS_FIELD_NUMBER: builtins.int
-    success: builtins.bool
+    def __init__(
+        self,
+    ) -> None: ...
+
+global___ReportRequest = ReportRequest
+
+@typing_extensions.final
+class ReportResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    RAW_FIELD_NUMBER: builtins.int
+    BUG_TYPE_FIELD_NUMBER: builtins.int
+    DETAIL_FIELD_NUMBER: builtins.int
+    raw: builtins.str
+    bug_type: builtins.str
+    detail: builtins.str
     def __init__(
         self,
         *,
-        success: builtins.bool = ...,
+        raw: builtins.str = ...,
+        bug_type: builtins.str = ...,
+        detail: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["success", b"success"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bug_type", b"bug_type", "detail", b"detail", "raw", b"raw"]) -> None: ...
 
-global___StartResponse = StartResponse
+global___ReportResponse = ReportResponse
 
 @typing_extensions.final
 class StopRequest(google.protobuf.message.Message):

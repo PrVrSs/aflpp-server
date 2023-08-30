@@ -5,13 +5,20 @@ import janus
 from grpc_health.v1 import health, health_pb2_grpc
 
 from aflpp_server.aflpp import AFLPP
+from aflpp_server.db import async_engine
 from aflpp_server.helper import async_run, cleanup_coroutines
 from aflpp_server.logger import logger
+from aflpp_server.models.base import metadata_obj
 from aflpp_server.process import AFLProcess
 from aflpp_server.protoc.v1.aflpp_pb2_grpc import add_AFLPPServicer_to_server
 from aflpp_server.settings import settings
 from aflpp_server.v1.aflpp import AFLPPServicer
 from aflpp_server.workspace import Workspace
+
+
+async def init_db():
+    async with async_engine.begin() as conn:
+        await conn.run_sync(metadata_obj.create_all)
 
 
 class AFLPPServer:
@@ -41,6 +48,8 @@ class AFLPPServer:
 
 @async_run
 async def run_aflpp_server():
+    await init_db()
+
     queue = janus.Queue()
 
     workspace = Workspace(queue.sync_q)

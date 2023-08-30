@@ -2,15 +2,12 @@ syntax = "proto3";
 
 package aflpp.v1;
 
-message Server {
-  string name = 1;
-  string version = 2;
-}
 
 service AFLPP {
   rpc start (StartRequest) returns (StartResponse) {}
   rpc stop (StopRequest) returns (StopResponse) {}
   rpc stats (StatisticRequest) returns (StatisticResponse) {}
+  rpc reports (ReportRequest) returns (stream ReportResponse) {}
 }
 
 message StartRequest {
@@ -18,6 +15,10 @@ message StartRequest {
   string binary_args = 2;
   string aflpp_args = 3;
   repeated bytes seeds = 4;
+}
+
+message StartResponse {
+  bool success = 1;
 }
 
 message StatisticRequest {}
@@ -68,14 +69,15 @@ message StatisticResponse {
   string command_line = 43;
 }
 
+message ReportRequest {}
 
-message StartResponse {
-  bool success = 1;
+message ReportResponse {
+  string raw = 1;
+  string bug_type = 2;
+  string detail = 3;
 }
 
-
 message StopRequest {}
-
 
 message StopResponse {
   bool success = 1;

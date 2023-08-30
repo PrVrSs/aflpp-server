@@ -6,7 +6,9 @@ from watchdog.events import FileCreatedEvent
 
 from aflpp_server.binary import Binary
 from aflpp_server.constants import State
+from aflpp_server.db import get_session
 from aflpp_server.logger import logger
+from aflpp_server.models import Report
 from aflpp_server.process import AFLProcess
 from aflpp_server.replay import make_replay
 
@@ -29,7 +31,6 @@ class AFLPP:
 
         self._target = None
         self._tasks = []
-        self._reports = []
 
     async def start(self, source: bytes, aflpp_args: str, binary_args: str, seeds: list[bytes]) -> bool:
         if self._state == State.RUNNING:
@@ -46,9 +47,10 @@ class AFLPP:
             aflpp_arguments=aflpp_args.split(),
         )
 
+        await asyncio.sleep(0.2)
+
         self._workspace.start()
         self._create_tasks()
-
         self._state = State.RUNNING
 
         return True
@@ -90,13 +92,19 @@ class AFLPP:
             binary_path=self._target.path(),
             stdin_file=str(filename),
         )
-        logger.info(replay.report)
-        self._reports.append(replay.report)
+
+        async with get_session() as session:
+            await Report.add(
+                session=session,
+                raw=replay.report.report['raw'],
+                bug_type=replay.report.report['bug_type'],
+                detail=replay.report.report['detail'],
+            )
 
     def _create_tasks(self):
         self._tasks = [
-            self._loop.create_task(self._monitor_task()),
-            self._loop.create_task(self._replay_task()),
+            self._loop.create_task(self._monitor_task(), name='monitor_task'),
+            self._loop.create_task(self._replay_task(), name='replay_task'),
         ]
 
     async def _monitor_task(self):

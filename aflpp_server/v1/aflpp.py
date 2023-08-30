@@ -1,7 +1,11 @@
 import grpc
 
 from aflpp_server.aflpp import AFLPP
+from aflpp_server.db import get_session
+from aflpp_server.models import Report
 from aflpp_server.protoc.v1.aflpp_pb2 import (
+    ReportRequest,
+    ReportResponse,
     StartRequest,
     StartResponse,
     StatisticRequest,
@@ -31,3 +35,12 @@ class AFLPPServicer(_AFLPPServicer):
 
     async def stats(self, request: StatisticRequest, context: grpc.aio.ServicerContext) -> StatisticResponse:
         return StatisticResponse(**(await self._aflpp.stats()))
+
+    async def reports(self, request: ReportRequest, context: grpc.aio.ServicerContext) -> ReportResponse:
+        async with get_session() as session:
+            async for report in Report.select_all(session=session):
+                yield ReportResponse(
+                    raw=report.raw,
+                    bug_type=report.bug_type,
+                    detail=report.detail,
+                )

@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15protoc/v1/aflpp.proto\x12\x08\x61\x66lpp.v1\"\'\n\x06Server\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\"V\n\x0cStartRequest\x12\x0e\n\x06\x62inary\x18\x01 \x01(\x0c\x12\x13\n\x0b\x62inary_args\x18\x02 \x01(\t\x12\x12\n\naflpp_args\x18\x03 \x01(\t\x12\r\n\x05seeds\x18\x04 \x03(\x0c\"\x12\n\x10StatisticRequest\"\xcb\x07\n\x11StatisticResponse\x12\x12\n\nstart_time\x18\x01 \x01(\x04\x12\x13\n\x0blast_update\x18\x02 \x01(\x04\x12\x10\n\x08run_time\x18\x03 \x01(\x04\x12\x12\n\nfuzzer_pid\x18\x04 \x01(\r\x12\x13\n\x0b\x63ycles_done\x18\x05 \x01(\r\x12\x17\n\x0f\x63ycles_wo_finds\x18\x06 \x01(\r\x12\x15\n\rtime_wo_finds\x18\x07 \x01(\x04\x12\x12\n\nexecs_done\x18\x08 \x01(\x04\x12\x15\n\rexecs_per_sec\x18\t \x01(\x02\x12\x19\n\x11\x65xecs_ps_last_min\x18\n \x01(\x02\x12\x14\n\x0c\x63orpus_count\x18\x0b \x01(\r\x12\x16\n\x0e\x63orpus_favored\x18\x0c \x01(\r\x12\x14\n\x0c\x63orpus_found\x18\r \x01(\r\x12\x17\n\x0f\x63orpus_imported\x18\x0e \x01(\r\x12\x17\n\x0f\x63orpus_variable\x18\x0f \x01(\r\x12\x11\n\tmax_depth\x18\x10 \x01(\r\x12\x10\n\x08\x63ur_item\x18\x11 \x01(\r\x12\x14\n\x0cpending_favs\x18\x12 \x01(\r\x12\x15\n\rpending_total\x18\x13 \x01(\r\x12\x11\n\tstability\x18\x14 \x01(\x02\x12\x12\n\nbitmap_cvg\x18\x15 \x01(\x02\x12\x15\n\rsaved_crashes\x18\x16 \x01(\r\x12\x13\n\x0bsaved_hangs\x18\x17 \x01(\r\x12\x11\n\tlast_find\x18\x18 \x01(\x04\x12\x12\n\nlast_crash\x18\x19 \x01(\x04\x12\x11\n\tlast_hang\x18\x1a \x01(\r\x12\x19\n\x11\x65xecs_since_crash\x18\x1b \x01(\r\x12\x14\n\x0c\x65xec_timeout\x18\x1c \x01(\r\x12\x17\n\x0fslowest_exec_ms\x18\x1d \x01(\r\x12\x13\n\x0bpeak_rss_mb\x18\x1e \x01(\r\x12\x14\n\x0c\x63pu_affinity\x18\x1f \x01(\r\x12\x13\n\x0b\x65\x64ges_found\x18  \x01(\r\x12\x13\n\x0btotal_edges\x18! \x01(\r\x12\x16\n\x0evar_byte_count\x18\" \x01(\r\x12\x17\n\x0fhavoc_expansion\x18# \x01(\r\x12\x19\n\x11\x61uto_dict_entries\x18$ \x01(\r\x12\x16\n\x0etestcache_size\x18% \x01(\r\x12\x17\n\x0ftestcache_count\x18& \x01(\r\x12\x17\n\x0ftestcache_evict\x18\' \x01(\r\x12\x12\n\nafl_banner\x18( \x01(\t\x12\x13\n\x0b\x61\x66l_version\x18) \x01(\t\x12\x13\n\x0btarget_mode\x18* \x01(\t\x12\x14\n\x0c\x63ommand_line\x18+ \x01(\t\" \n\rStartResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\r\n\x0bStopRequest\"\x1f\n\x0cStopResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\xc0\x01\n\x05\x41\x46LPP\x12:\n\x05start\x12\x16.aflpp.v1.StartRequest\x1a\x17.aflpp.v1.StartResponse\"\x00\x12\x37\n\x04stop\x12\x15.aflpp.v1.StopRequest\x1a\x16.aflpp.v1.StopResponse\"\x00\x12\x42\n\x05stats\x12\x1a.aflpp.v1.StatisticRequest\x1a\x1b.aflpp.v1.StatisticResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x15protoc/v1/aflpp.proto\x12\x08\x61\x66lpp.v1\"V\n\x0cStartRequest\x12\x0e\n\x06\x62inary\x18\x01 \x01(\x0c\x12\x13\n\x0b\x62inary_args\x18\x02 \x01(\t\x12\x12\n\naflpp_args\x18\x03 \x01(\t\x12\r\n\x05seeds\x18\x04 \x03(\x0c\" \n\rStartResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"\x12\n\x10StatisticRequest\"\xcb\x07\n\x11StatisticResponse\x12\x12\n\nstart_time\x18\x01 \x01(\x04\x12\x13\n\x0blast_update\x18\x02 \x01(\x04\x12\x10\n\x08run_time\x18\x03 \x01(\x04\x12\x12\n\nfuzzer_pid\x18\x04 \x01(\r\x12\x13\n\x0b\x63ycles_done\x18\x05 \x01(\r\x12\x17\n\x0f\x63ycles_wo_finds\x18\x06 \x01(\r\x12\x15\n\rtime_wo_finds\x18\x07 \x01(\x04\x12\x12\n\nexecs_done\x18\x08 \x01(\x04\x12\x15\n\rexecs_per_sec\x18\t \x01(\x02\x12\x19\n\x11\x65xecs_ps_last_min\x18\n \x01(\x02\x12\x14\n\x0c\x63orpus_count\x18\x0b \x01(\r\x12\x16\n\x0e\x63orpus_favored\x18\x0c \x01(\r\x12\x14\n\x0c\x63orpus_found\x18\r \x01(\r\x12\x17\n\x0f\x63orpus_imported\x18\x0e \x01(\r\x12\x17\n\x0f\x63orpus_variable\x18\x0f \x01(\r\x12\x11\n\tmax_depth\x18\x10 \x01(\r\x12\x10\n\x08\x63ur_item\x18\x11 \x01(\r\x12\x14\n\x0cpending_favs\x18\x12 \x01(\r\x12\x15\n\rpending_total\x18\x13 \x01(\r\x12\x11\n\tstability\x18\x14 \x01(\x02\x12\x12\n\nbitmap_cvg\x18\x15 \x01(\x02\x12\x15\n\rsaved_crashes\x18\x16 \x01(\r\x12\x13\n\x0bsaved_hangs\x18\x17 \x01(\r\x12\x11\n\tlast_find\x18\x18 \x01(\x04\x12\x12\n\nlast_crash\x18\x19 \x01(\x04\x12\x11\n\tlast_hang\x18\x1a \x01(\r\x12\x19\n\x11\x65xecs_since_crash\x18\x1b \x01(\r\x12\x14\n\x0c\x65xec_timeout\x18\x1c \x01(\r\x12\x17\n\x0fslowest_exec_ms\x18\x1d \x01(\r\x12\x13\n\x0bpeak_rss_mb\x18\x1e \x01(\r\x12\x14\n\x0c\x63pu_affinity\x18\x1f \x01(\r\x12\x13\n\x0b\x65\x64ges_found\x18  \x01(\r\x12\x13\n\x0btotal_edges\x18! \x01(\r\x12\x16\n\x0evar_byte_count\x18\" \x01(\r\x12\x17\n\x0fhavoc_expansion\x18# \x01(\r\x12\x19\n\x11\x61uto_dict_entries\x18$ \x01(\r\x12\x16\n\x0etestcache_size\x18% \x01(\r\x12\x17\n\x0ftestcache_count\x18& \x01(\r\x12\x17\n\x0ftestcache_evict\x18\' \x01(\r\x12\x12\n\nafl_banner\x18( \x01(\t\x12\x13\n\x0b\x61\x66l_version\x18) \x01(\t\x12\x13\n\x0btarget_mode\x18* \x01(\t\x12\x14\n\x0c\x63ommand_line\x18+ \x01(\t\"\x0f\n\rReportRequest\"?\n\x0eReportResponse\x12\x0b\n\x03raw\x18\x01 \x01(\t\x12\x10\n\x08\x62ug_type\x18\x02 \x01(\t\x12\x0e\n\x06\x64\x65tail\x18\x03 \x01(\t\"\r\n\x0bStopRequest\"\x1f\n\x0cStopResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x32\x82\x02\n\x05\x41\x46LPP\x12:\n\x05start\x12\x16.aflpp.v1.StartRequest\x1a\x17.aflpp.v1.StartResponse\"\x00\x12\x37\n\x04stop\x12\x15.aflpp.v1.StopRequest\x1a\x16.aflpp.v1.StopResponse\"\x00\x12\x42\n\x05stats\x12\x1a.aflpp.v1.StatisticRequest\x1a\x1b.aflpp.v1.StatisticResponse\"\x00\x12@\n\x07reports\x12\x17.aflpp.v1.ReportRequest\x1a\x18.aflpp.v1.ReportResponse\"\x00\x30\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -23,20 +23,22 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'protoc.v1.aflpp_pb2', _glob
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  _globals['_SERVER']._serialized_start=35
-  _globals['_SERVER']._serialized_end=74
-  _globals['_STARTREQUEST']._serialized_start=76
-  _globals['_STARTREQUEST']._serialized_end=162
-  _globals['_STATISTICREQUEST']._serialized_start=164
-  _globals['_STATISTICREQUEST']._serialized_end=182
-  _globals['_STATISTICRESPONSE']._serialized_start=185
-  _globals['_STATISTICRESPONSE']._serialized_end=1156
-  _globals['_STARTRESPONSE']._serialized_start=1158
-  _globals['_STARTRESPONSE']._serialized_end=1190
-  _globals['_STOPREQUEST']._serialized_start=1192
-  _globals['_STOPREQUEST']._serialized_end=1205
-  _globals['_STOPRESPONSE']._serialized_start=1207
-  _globals['_STOPRESPONSE']._serialized_end=1238
-  _globals['_AFLPP']._serialized_start=1241
-  _globals['_AFLPP']._serialized_end=1433
+  _globals['_STARTREQUEST']._serialized_start=35
+  _globals['_STARTREQUEST']._serialized_end=121
+  _globals['_STARTRESPONSE']._serialized_start=123
+  _globals['_STARTRESPONSE']._serialized_end=155
+  _globals['_STATISTICREQUEST']._serialized_start=157
+  _globals['_STATISTICREQUEST']._serialized_end=175
+  _globals['_STATISTICRESPONSE']._serialized_start=178
+  _globals['_STATISTICRESPONSE']._serialized_end=1149
+  _globals['_REPORTREQUEST']._serialized_start=1151
+  _globals['_REPORTREQUEST']._serialized_end=1166
+  _globals['_REPORTRESPONSE']._serialized_start=1168
+  _globals['_REPORTRESPONSE']._serialized_end=1231
+  _globals['_STOPREQUEST']._serialized_start=1233
+  _globals['_STOPREQUEST']._serialized_end=1246
+  _globals['_STOPRESPONSE']._serialized_start=1248
+  _globals['_STOPRESPONSE']._serialized_end=1279
+  _globals['_AFLPP']._serialized_start=1282
+  _globals['_AFLPP']._serialized_end=1540
 # @@protoc_insertion_point(module_scope)

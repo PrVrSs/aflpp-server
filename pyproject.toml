@@ -20,6 +20,7 @@ janus = "^1.0.0"
 aiofiles = "^23.2.1"
 grpcio-health-checking = "^1.57.0"
 attrs = "^23.1.0"
+sqlalchemy = "^2.0.20"
 
 
 [tool.poetry.group.dev.dependencies]
